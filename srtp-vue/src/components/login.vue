@@ -105,8 +105,9 @@ export default {
               }
               else if(this.userType == 0)
                 this.$router.push("/comm/item")//主页界面跳转
+
               else if(this.userType == 2){
-                this.$router.push("/person/item")//主页界面跳转
+                this.$router.push("/user")//主页界面跳转
                 sessionStorage.setItem("user_data", JSON.stringify(res.data))//缓存用户信息
               }
             }else{

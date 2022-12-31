@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import layout from "@/layout/layout.vue";
+import layout_user from "@/layout/Layout_user.vue";
 
 const routes =[
     {
@@ -23,6 +24,20 @@ const routes =[
                 path: '/market',
                 name: 'market',
                 component: ()=>import("@/view/market.vue"),
+
+            },
+        ]
+    },
+    {
+        path: '/user',
+        name: 'Layout_user',
+        component: layout_user,
+        redirect:"/user",
+        children:[
+            {
+                path: '/user',
+                name: 'market',
+                component: ()=>import("@/view/user.vue"),
 
             },
         ]
