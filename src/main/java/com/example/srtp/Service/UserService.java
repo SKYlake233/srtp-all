@@ -2,7 +2,9 @@ package com.example.srtp.Service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.srtp.Common.Constants;
+import com.example.srtp.Common.DataPage;
 import com.example.srtp.Common.Exception.MyException;
 import com.example.srtp.Entity.Item;
 import com.example.srtp.Entity.UserData;
@@ -10,6 +12,8 @@ import com.example.srtp.Mapper.ItemMapper;
 import com.example.srtp.Mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
 
 @Service
 public class UserService {
@@ -55,5 +59,27 @@ public class UserService {
         itemWrapper.eq("item_id",userId);
         itemWrapper.setSql("item_count = item_count - 1");
         itemMapper.update(null,itemWrapper);
+    }
+
+    public HashMap<String, Object> page(DataPage dataPage) {
+        String search = "";
+        if(dataPage.getParam().containsKey("search"))
+            search = (String) dataPage.getParam().get("search");
+        Page<UserData> page = new Page<UserData>();
+        page.setCurrent(dataPage.getPageNum());
+        page.setSize(dataPage.getPageSize());
+        QueryWrapper<UserData> userPageWrapper = new QueryWrapper<>();
+        userPageWrapper.like("user_name",search);
+        HashMap<String , Object> map = new HashMap<String, Object>();
+        map.put("total",userMapper.selectPage(page , userPageWrapper).getTotal());
+        map.put("data",userMapper.selectPage(page , userPageWrapper).getRecords());
+        return map;
+    }
+
+    public int addCoins(int userId, int count) {
+        UpdateWrapper userWrapper = new UpdateWrapper();
+        userWrapper.eq("user_id",userId);
+        userWrapper.setSql("coins = coins + "+count);
+        return userMapper.update(null,userWrapper);
     }
 }

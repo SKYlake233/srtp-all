@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import layout from "@/layout/layout.vue";
 import layout_user from "@/layout/Layout_user.vue";
+import layout_comm from "@/layout/Layout_comm.vue";
 
 const routes =[
     {
@@ -36,9 +37,27 @@ const routes =[
         children:[
             {
                 path: '/user',
-                name: 'market',
+                name: 'user',
                 component: ()=>import("@/view/user.vue"),
 
+            },
+        ]
+    },
+    {
+        path: '/comm',
+        name: 'Layout_comm',
+        component: layout_comm,
+        redirect:"/comm/item",
+        children:[
+            {
+                path: '/comm/item',
+                name: 'comm_item',
+                component: ()=>import("@/view/comm_item.vue"),
+            },
+            {
+                path: '/comm/person',
+                name: 'comm_user',
+                component: ()=>import("@/view/person.vue"),
             },
         ]
     }
