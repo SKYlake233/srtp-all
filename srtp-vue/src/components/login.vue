@@ -94,13 +94,13 @@ export default {
           request.post(this.urls[this.userType],
               this.login_data).then(res=>{
             console.log(res)
-            if(res.code==200){
+            if(res.code == 200){
               this.$message({
                 type:"success",
                 message:"登录成功"
               })
               if(this.userType == 1){
-                this.$router.push("/user")//主页界面跳转
+                this.$router.push("/market")//主页界面跳转
                 sessionStorage.setItem("market_data", JSON.stringify(res.data))//缓存用户信息
               }
               else if(this.userType == 0)
