@@ -1,6 +1,6 @@
 <template>
   <div style="height: 50px;line-height: 50px;border-bottom: 1px solid springgreen;display: flex">
-    <div style="width: 200px;padding-left: 30px;font-weight: bold;color: deepskyblue">社区管理系统</div>
+    <div style="width: 200px;padding-left: 30px;font-weight: bold;color: deepskyblue">用户端</div>
     <div style="flex: 1"></div>
     <div style="width: 100px;font-weight: bold;padding-top: 14px">
       <el-dropdown>

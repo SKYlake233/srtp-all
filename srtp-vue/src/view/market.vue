@@ -3,7 +3,6 @@
 
     <div style="margin: 10px 0">
       <el-button color="#909399" @click="add">发布新捐赠商品</el-button>
-      <el-button color="#909399">导出数据</el-button>
     </div>
 
     <div style="margin: 10px 0">
