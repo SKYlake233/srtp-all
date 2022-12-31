@@ -82,4 +82,8 @@ public class UserService {
         userWrapper.setSql("coins = coins + "+count);
         return userMapper.update(null,userWrapper);
     }
+
+    public int regis(UserData userData) {
+        return userMapper.insert(userData);
+    }
 }

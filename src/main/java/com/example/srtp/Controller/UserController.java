@@ -25,6 +25,12 @@ public class UserController {
         return Result.success(userService.login(userData.getUserName() , userData.getUserPass()));
     }
 
+    @PostMapping("/regis")
+    public Result regis(@RequestBody UserData userData){
+        userService.regis(userData);
+        return Result.success();
+    }
+
     @PostMapping("/page")
     public HashMap<String,Object> page(@RequestBody DataPage dataPage){
         return userService.page(dataPage);

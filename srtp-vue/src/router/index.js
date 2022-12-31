@@ -16,6 +16,12 @@ const routes =[
         component: () => import('../components/login.vue')
     },
     {
+        path:'/register',
+        name:'register',
+        title: '注册',
+        component: () => import('../components/register.vue')
+    },
+    {
         path: '/market',
         name: 'Layout',
         component: layout,

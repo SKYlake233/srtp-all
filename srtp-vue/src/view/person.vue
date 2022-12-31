@@ -5,7 +5,7 @@
     </div>
 
     <div style="margin: 10px 0">
-      <el-input v-model="search" placeholder="请输入关键字（物品名）" clearable style="width: 20%"/>
+      <el-input v-model="search" placeholder="请输入关键字（用户名）" clearable style="width: 20%"/>
       <el-button type="success" style="margin-left: 5px" @click="load">查询</el-button>
     </div>
 

@@ -1,7 +1,7 @@
 <template>
   <div style="width: 100%; height: 100vh; background: paleturquoise; overflow: hidden">
     <div style="width: 400px;margin: 150px auto">
-      <div style="color: red;font-size: 30px;text-align: center;padding: 30px" >商店慈善物品管理系统</div>
+      <div style="color: red;font-size: 30px;text-align: center;padding: 30px" >XXXX管理系统</div>
       <el-form ref="form" :model="form" size="normal" :rules="rules">
         <el-form-item prop="marketAccountName">
           <el-input  :prefix-icon="Avatar" v-model="form.username"></el-input>
