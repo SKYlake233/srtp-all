@@ -15,6 +15,7 @@
       <el-table-column prop="itemId" label="商品id" sortable />
       <el-table-column prop="marketName" label="超市名称"  />
       <el-table-column prop="itemName" label="商品名称" />
+      <el-table-column prop="itemValue" label="商品价值" />
       <el-table-column prop="itemCount" label="商品数量" />
       <el-table-column fixed="right" label="操作" width="120">
         <template #default="scope">
@@ -38,13 +39,15 @@
             <el-form-item label="您的用户id">
               <el-input v-model=this.userId  readonly="readonly" style="width: 80%"/>
             </el-form-item>
-            <el-form-item label="商品数量">
+            <el-form-item label="商品剩余数量">
               <el-input v-model=this.form.itemCount  readonly="readonly" style="width: 80%"/>
             </el-form-item>
-            <el-form-item label="爱心币数量">
+            <el-form-item label="所需爱心币数量">
+              <el-input v-model=this.form.itemValue  readonly="readonly" style="width: 80%"/>
+            </el-form-item>
+            <el-form-item label="您的爱心币数量">
               <el-input v-model=this.coins  readonly="readonly" style="width: 80%"/>
             </el-form-item>
-            消耗一个爱心币，确认兑换？
           </el-form>
           <template #footer>
       <span class="dialog-footer">
@@ -102,11 +105,13 @@ export default {
   methods:{
     save(){
       //联网进行操作
-      if(this.coins <= 0 || this.form.itemCount <= 0)
+      if(this.coins < this.form.itemValue || this.form.itemCount <= 0){
         this.$message({
           type:"error",
           message:"爱心币不足或商品已经兑换完全"
-        })
+        });
+        return;
+      }
       request.get("/user/reward/"+this.userId+"/"+this.form.itemId).then(res =>{
         if(res.code == 200){
           this.$message({
@@ -119,8 +124,8 @@ export default {
             message:res.msg
           })
         }
+        this.load();
       })
-      this.load();  //添加完成后刷新表单
       this.dialogVisible=false//关闭弹窗
     },
     handleEdit(row){//编辑

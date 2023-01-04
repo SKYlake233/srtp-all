@@ -19,6 +19,7 @@
       <el-table-column prop="marketName" label="超市名称"  />
       <el-table-column prop="itemName" label="商品名称" />
       <el-table-column prop="itemCount" label="商品数量" />
+      <el-table-column prop="itemValue" label="商品价值" />
     </el-table>
     <div style="margin:10px 0">
       <div class="demo-pagination-block">

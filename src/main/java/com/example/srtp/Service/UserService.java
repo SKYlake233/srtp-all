@@ -42,21 +42,26 @@ public class UserService {
     }
 
     public void reward(int userId, int itemId) {
-        if(getCoins(userId) <= 0 )
-            throw new MyException(Constants.CODE_500 , "用户的爱心币数量太少");
         QueryWrapper queryWrapper = new QueryWrapper<Item>().eq("item_id" , itemId);
-        int count= (int) itemMapper.selectOne(queryWrapper).getItemCount();
+        Item item =  itemMapper.selectOne(queryWrapper);
+
+        int count = (int) item.getItemCount();
         if(count <= 0)
             throw new MyException(Constants.CODE_500 , "物品数量太少");
+        int value = (int) item.getItemValue();
 
-        //开始两个减一
+        if(getCoins(userId) < value )
+            throw new MyException(Constants.CODE_500 , "用户的爱心币数量太少");
+
+        //开始减少用户爱心币数量
         UpdateWrapper userWrapper = new UpdateWrapper();
         userWrapper.eq("user_id",userId);
-        userWrapper.setSql("coins = coins - 1");
+        userWrapper.setSql("coins = coins - " + value);
         userMapper.update(null,userWrapper);
 
+        //减少物品数量
         UpdateWrapper itemWrapper = new UpdateWrapper();
-        itemWrapper.eq("item_id",userId);
+        itemWrapper.eq("item_id",itemId);
         itemWrapper.setSql("item_count = item_count - 1");
         itemMapper.update(null,itemWrapper);
     }

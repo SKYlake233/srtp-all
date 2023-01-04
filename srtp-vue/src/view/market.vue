@@ -15,7 +15,7 @@
       <el-table-column prop="marketName" label="超市名称"  />
       <el-table-column prop="itemName" label="商品名称" />
       <el-table-column prop="itemCount" label="商品数量" />
-
+      <el-table-column prop="itemValue" label="商品价值" />
       <el-table-column align="center" label="操作" width="110">
         <template v-slot="scope">
           <el-button  @click="handleEdit(scope.row)"  size="small" type="primary" >编辑</el-button>
@@ -47,6 +47,9 @@
             </el-form-item>
             <el-form-item label="商品数量">
               <el-input v-model="form.itemCount" style="width: 80%"/>
+            </el-form-item>
+            <el-form-item label="商品价值">
+              <el-input v-model="form.itemValue" style="width: 80%"/>
             </el-form-item>
           </el-form>
           <template #footer>

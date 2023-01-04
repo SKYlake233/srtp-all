@@ -89,6 +89,7 @@ export default {
             message:"添加失败"
           })
         }
+        this.load();
       })
       this.load();  //添加完成后刷新表单
       this.dialogVisible=false//关闭弹窗
